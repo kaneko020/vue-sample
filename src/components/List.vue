@@ -1,23 +1,83 @@
 <script setup lang="ts">
-import { ref, reactive, watch } from 'vue';
+import { Todo } from '../types/todo';
 
 const props = defineProps<{
-    todoList: string[]
+    todoList: Todo[]
 }>()
+
+const emit = defineEmits({
+    delete: (todo: Todo) => true,
+    openModal: (todo: Todo) => true
+})
+
+const openModal = (todo: Todo) => {
+    emit('openModal', todo)
+}
+
+const onDelete = (uuid: string) => {
+    emit('delete', uuid)
+}
 
 </script>
 
 <template>
-    <div class="todo-list">
-        <ul>
-            <li v-for="(todo, index) in props.todoList" :key="index">
-                {{ todo }}
-                <button @click="deleteTodo(index)">削除</button>
-            </li>
-        </ul>
-    </div>
+    <ul class="todo-list">
+        <li v-for="(todo, index) in props.todoList" :key="index">
+            <div class="todo-item">
+                <p class="title">{{ todo.title }}</p>
+                <!-- <p>{{ todo.url }}</p>
+                <p>{{ todo.summary }}</p> -->
+                <div class="button-group">
+                    <button @click="() => openModal(todo)">詳細</button>
+                    <button @click="() => onDelete(todo.uuid)">削除</button>
+                </div>
+            </div>
+        </li>
+    </ul>
 </template>
 
 <style scoped>
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.todo-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2px;
+}
+
+.title {
+    font-size: 16px;
+    color: #2d8fdd;
+    font-weight: bold;
+}
+
+button {
+    margin-left: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    color: #2d8fdd;
+    border-left: solid 6px #2d8fdd;
+    background: #f1f8ff;
+    margin-bottom: 5px;
+    line-height: 1.5;
+    padding: 0.5em;
+    width: 60%;
+}
+
 
 </style>

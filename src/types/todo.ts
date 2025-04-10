@@ -1,5 +1,5 @@
 export type Todo = {
+    uuid: string
     title: string
-    url: string
     summary: string
 }

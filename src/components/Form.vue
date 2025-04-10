@@ -1,28 +1,41 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watch } from 'vue';
 import { Todo } from '../types/todo';
+import { ref } from 'vue';
 
+const todo = ref<Todo>({
+    uuid: '',
+    title: '',
+    summary: ''
+})
 
-const todoList = reactive<Todo[]>([
-    {
-        title: 'Vueの勉強',
-        url: 'https://www.udemy.com/share/105XXM3@lkjLaFyLMS4gI0SBTdaj_KcRgRT_Md-52oDUUxEP9QW5CdDDNJJ84r1iYnYf19JKoQ==/',
-        summary: '',
+const emit = defineEmits({
+    submit: (todo: Todo) => true
+})
+
+// フォーム送信処理
+const onSubmit = (value: Todo) => {
+    if (value.title) {
+        emit('submit', value)
+        // フォームリセット
+        todo.value = {
+            uuid: '',
+            title: '',
+            summary: ''
+        }
     }
-])
-
-const onSubmit = () => {
-
 }
+
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit" class="todo-form">
-        <input type="text" placeholder="TODOを入力" v-model="todoList.title" />
-        <input type="text" placeholder="URLを入力" v-model="todoList.url" />
-        <textarea type="text" placeholder="備考" v-model="todoList.summary" />
-        <button type="submit">追加</button>
-    </form>
+    <div class="accordion">
+        <form @submit.prevent="() => onSubmit(todo)" class="todo-form">
+            <input type="text" placeholder="TODOを入力" v-model="todo.title" />
+            <!-- <input type="text" placeholder="URLを入力" v-model="todo.url" /> -->
+            <textarea type="text" placeholder="備考" v-model="todo.summary" />
+            <button type="submit">追加</button>
+        </form>
+    </div>
 </template>
 
 <style scoped>
@@ -34,7 +47,7 @@ const onSubmit = () => {
 }
 
 input {
-    width: 800px;
+    width: 60%;
     font-size: 15px;
     padding: 8px;
     border: 1px solid #ddd;
@@ -43,7 +56,7 @@ input {
 }
 
 textarea {
-    width: 800px;
+    width: 60%;
     height: 100px;
     font-size: 15px;
     padding: 8px;

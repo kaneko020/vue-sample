@@ -1,9 +1,9 @@
 <script setup>
-import Todo from './components/Todo.vue';
+import TodoList from './components/TodoList.vue';
 </script>
 
 <template>
-  <Todo />
+  <TodoList />
 </template>
 
 <style scoped>
