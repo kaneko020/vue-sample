@@ -12,12 +12,12 @@
     display: flex;
     align-items: center;
     padding-left: 30px;
-    height: 80px;
+    height: 60px;
     background-color: #f0f0f0;
 }
 
 h1 {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bolder;
 }
 </style>
