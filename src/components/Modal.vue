@@ -23,7 +23,7 @@ const closeModal = () => {
         </div>
         <div class="modal-content">
             <p class="todo-title">{{ props.todo.title }}</p>
-            <p>備考：{{ props.todo.summary }}</p>
+            <p>{{ props.todo.summary }}</p>
         </div>
     </div>
 </template>
@@ -58,6 +58,12 @@ const closeModal = () => {
     color: black;
     text-decoration: none;
     cursor: pointer;
+    font-weight: 1000;
+    margin-top: -3px;
+}
+
+.close:hover {
+    color: #666666;
 }
 
 .modal-content {
@@ -69,6 +75,7 @@ const closeModal = () => {
 .todo-title {
     font-size: 17px;
     font-weight: bold;
+    margin-bottom: 8px;
 }
 
 button {

@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits({
-    delete: (todo: Todo) => true,
+    delete: (uuid: string) => true,
     openModal: (todo: Todo) => true
 })
 
@@ -62,6 +62,16 @@ const onDelete = (uuid: string) => {
 
 button {
     margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 10px;
+    cursor: pointer;
+    background-color: #2d8fdd;
+    color: white;
+}
+
+button:hover {
+    background-color: #1e66a0;
 }
 
 ul {
@@ -75,7 +85,7 @@ ul li {
     background: #f1f8ff;
     margin-bottom: 5px;
     line-height: 1.5;
-    padding: 0.5em;
+    padding: 4px 10px;
     width: 60%;
 }
 

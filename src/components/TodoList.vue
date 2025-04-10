@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Header from './Header.vue';
 import Form from './Form.vue';
+import Header from './Header.vue';
 import List from './List.vue';
 import Modal from './Modal.vue';
 import { Todo } from '../types/todo';
@@ -10,7 +10,6 @@ import { v4 } from 'uuid';
 const todoList = reactive<Todo[]>([])
 
 const onSubmit = (todo: Todo) => {
-    // IDを生成
     todo.uuid = v4()
     todoList.push(todo)
 }
@@ -52,7 +51,7 @@ const onDelete = (uuid: string) => {
         <List :todoList="todoList" @openModal="openModal" @delete="onDelete" />
     </div>
     <Modal v-if="isOpen" class="modal" :todo="modalData" @closeModal="closeModal" />
-    <div v-if="isOpen" class="open-modal"></div>
+    <div v-if="isOpen" class="open-modal" @click="closeModal"></div>
 </template>
 
 <style scoped>
