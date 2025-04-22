@@ -7,7 +7,14 @@ import { Todo } from '../types/todo';
 import { ref, reactive } from 'vue';
 import { v4 } from 'uuid';
 
+const isOpen = ref<boolean>(false)
 const todoList = reactive<Todo[]>([])
+
+const modalData = ref<Todo>({
+    uuid: '',
+    title: '',
+    summary: ''
+})
 
 const onSubmit = (todo: Todo) => {
     todo.uuid = v4()
@@ -16,13 +23,6 @@ const onSubmit = (todo: Todo) => {
 
 const emit = defineEmits({
     modal: (todo: Todo) => true
-})
-
-const isOpen = ref<boolean>(false)
-const modalData = ref<Todo>({
-    uuid: '',
-    title: '',
-    summary: ''
 })
 
 const closeModal = () => {
@@ -34,14 +34,12 @@ const openModal = (todo: Todo) => {
     modalData.value = todo
 }
 
-
 const onDelete = (uuid: string) => {
     const index = todoList.findIndex(todo => todo.uuid === uuid)
     if (index !== -1) {
         todoList.splice(index, 1)
     }
 }
-
 </script>
 
 <template>

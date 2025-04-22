@@ -24,14 +24,12 @@ const onSubmit = (value: Todo) => {
         }
     }
 }
-
 </script>
 
 <template>
     <div class="accordion">
         <form @submit.prevent="() => onSubmit(todo)" class="todo-form">
             <input type="text" placeholder="TODOを入力" v-model="todo.title" />
-            <!-- <input type="text" placeholder="URLを入力" v-model="todo.url" /> -->
             <textarea type="text" placeholder="備考" v-model="todo.summary" />
             <button type="submit">追加</button>
         </form>
